@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:task="http://www.springframework.org/schema/task"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+  
+  <!-- Enable @Controller (HandlerMapping, HandlerAdapter 자동 Bean 등록) --> 
+  <annotation-driven />
+  
+  <!-- Static Mapping -->
+  <resources location="/resources/" mapping="/resources/**" />
+  <resources location="file:/home/" mapping="/home/**" />
+  
+  <!-- ViewResolver -->
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/views/" />
+    <beans:property name="suffix" value=".jsp" />     
+  </beans:bean>
+    
+  <!-- @ComponentScan -->
+  <context:component-scan base-package="org.shark.file" />
+  
+  <!-- 1. HikariConfig -->
+  <beans:bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
+    <beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+    <beans:property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_file?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+    <beans:property name="username" value="goodee" />
+    <beans:property name="password" value="goodee" />
+  </beans:bean>
+  
+  <!-- 2. HikariDataSource -->
+  <beans:bean class="com.zaxxer.hikari.HikariDataSource" id="hikariDataSource">
+    <beans:constructor-arg ref="hikariConfig" />
+  </beans:bean>
+  
+  <!-- 3. SqlSessionFactoryBean -->
+  <beans:bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+    <beans:property name="dataSource" ref="hikariDataSource" />
+    <beans:property name="configLocation" value="classpath:mybatis/config/mybatis-config.xml" />
+    <beans:property name="mapperLocations" value="classpath:mybatis/mapper/*.xml" />
+  </beans:bean>
+  
+  <!-- 4. SqlSessionTemplate -->
+  <beans:bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+    <beans:constructor-arg ref="sqlSessionFactoryBean" />
+  </beans:bean>
+
+  <!-- 5. DataSourceTransactionManager -->
+  <beans:bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+    <beans:property name="dataSource" ref="hikariDataSource" />
+  </beans:bean>
+  
+  <!-- 6. @Transactional 어노테이션을 이용한 트랜잭션 처리 -->
+  <tx:annotation-driven transaction-manager="transactionManager" />
+  <aop:aspectj-autoproxy />
+  
+  <!-- Enable @Scheduled -->
+  <task:annotation-driven />
+  
+</beans:beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.userMapper">
+  
+  <select id="getAllUsers" resultType="UserDTO">
+    SELECT uid, email, file_path, original_filename, filesystem_name
+      FROM tbl_user
+     ORDER BY uid DESC
+     LIMIT 0, 10
+  </select>
+  
+  <select id="getUserById" parameterType="java.lang.Integer" resultType="UserDTO">
+    SELECT uid, email, file_path, original_filename, filesystem_name
+      FROM tbl_user
+     WHERE uid = #{uid}
+  </select>
+  
+  <insert id="insertUser" parameterType="UserDTO">
+    INSERT INTO tbl_user (email, file_path, original_filename, filesystem_name)
+    VALUES (#{email}, #{filePath}, #{originalFilename}, #{filesystemName})
+  </insert>
+  
+</mapper>
