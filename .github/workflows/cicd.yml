@@ -23,7 +23,6 @@ jobs:
     ##   ubuntu-latest == ubuntu-22.04 (2025년 기준)
     ##   github에서 제공하는 Github-hosted runners로 JDK, Docker, Maven, Gradle, Node.js 등이 사전 설치되어 있음
     ##   작업 디렉터리
-    ##   /home/runner/work/DeployProject/DeployProject 프롬프트 상에서 코드를 실행
     ##   /home/runner/
     ##    └── work/
     ##        └── DeployProject/          # 레파지토리명
