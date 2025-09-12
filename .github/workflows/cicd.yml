@@ -11,8 +11,9 @@ on:
     branches: [ "main" ]
 
 ## env : 환경 변수 (job에서 사용할 수 있는 변수, ${{ env.환경변수 }})
+## repository name must be lowercase
 env:
-  DOCKER_IMAGE_NAME: DeployProject
+  DOCKER_IMAGE_NAME: deploy-project
   DOCKER_IMAGE_TAG: latest
 
 ## jobs : 작업 목록 (job > step)
