@@ -64,7 +64,7 @@ public class FileCleanupScheduler {
     
     //----- 1. 어제 날짜의 폴더 경로 계산하기
     LocalDate yesterday = LocalDate.now().minusDays(1);
-    String dirPath = "/home/goodee/upload" + yesterday.format(DateTimeFormatter.ofPattern("/yyyy/MM/dd"));
+    String dirPath = "/home/ubuntu/upload" + yesterday.format(DateTimeFormatter.ofPattern("/yyyy/MM/dd"));
     
     //----- 2. 해당 폴더의 파일 목록 조회하기
     File dir = new File(dirPath);

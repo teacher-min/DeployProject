@@ -32,7 +32,7 @@
   <!-- 1. HikariConfig -->
   <beans:bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
     <beans:property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-    <beans:property name="jdbcUrl" value="jdbc:mysql://localhost:3306/db_file?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+    <beans:property name="jdbcUrl" value="jdbc:mysql://3.34.252.145:3306/db_file?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
     <beans:property name="username" value="goodee" />
     <beans:property name="password" value="goodee" />
   </beans:bean>

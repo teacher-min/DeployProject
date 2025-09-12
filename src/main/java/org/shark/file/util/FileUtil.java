@@ -17,7 +17,7 @@ public class FileUtil {
    *         예를 들어 2000-01-01 날짜에 메소드를 호출하면 "/upload/2000/01/01" 값을 반환합니다.
    */
   public String getFilePath() {
-    return "/home/goodee/upload" + DateTimeFormatter.ofPattern("/yyyy/MM/dd").format(today);
+    return "/home/ubuntu/upload" + DateTimeFormatter.ofPattern("/yyyy/MM/dd").format(today);
   }
   
   /**
