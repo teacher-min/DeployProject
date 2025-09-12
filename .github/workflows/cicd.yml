@@ -24,6 +24,18 @@ jobs:
     ##   github에서 제공하는 Github-hosted runners로 JDK, Docker, Maven, Gradle, Node.js 등이 사전 설치되어 있음
     ##   작업 디렉터리
     ##   /home/runner/work/DeployProject/DeployProject 프롬프트 상에서 코드를 실행
+    ##   /home/runner/
+    ##    └── work/
+    ##        └── DeployProject/          # 레파지토리명
+    ##            └── DeployProject/      # 체크아웃된 소스코드 위치
+    ##                ├── src/
+    ##                ├── pom.xml
+    ##                ├── Dockerfile
+    ##                ├── .github/
+    ##                │   └── workflows
+    ##                │       └── cicd.yml
+    ##                └── target/
+    ##                    └── DeployProject.war
     runs-on: ubuntu-latest
     ## 2) steps : job을 구성하는 하위 동작
     steps:
